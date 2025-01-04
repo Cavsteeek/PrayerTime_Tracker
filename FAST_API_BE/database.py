@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "postgresql://postgres:2505@localhost/fastapi/prayer_tracker"
+DATABASE_URL = "postgresql://postgres:2505@localhost/fastapi?options=-csearch_path=prayer_tracker,public"
 
 engine = create_engine(DATABASE_URL)
 
