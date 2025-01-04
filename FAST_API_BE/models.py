@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Date, Integer, String
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.expression import text
 from database import Base
 
 
@@ -17,7 +18,7 @@ class PrayerLog(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, index=True)
-    date = Column(String, index=True)
+    date = Column(Date, server_default=text("now()"), index=True)
     morning = Column(Integer, default=0)
     afternoon = Column(Integer, default=0)
     night = Column(Integer, default=0)
