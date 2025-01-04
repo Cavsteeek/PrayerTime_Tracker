@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Date, Integer, String
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.sql.expression import text
 from database import Base
+from sqlalchemy.sql.sqltypes import TIMESTAMP
 
 
 class User(Base):
@@ -11,6 +11,9 @@ class User(Base):
     first_name = Column(String, index=True)
     last_name = Column(String, index=True)
     password = Column(String)
+    created_at = Column(
+        TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
+    )
 
 
 class PrayerLog(Base):
@@ -18,7 +21,9 @@ class PrayerLog(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, index=True)
-    date = Column(Date, server_default=text("now()"), index=True)
+    date = Column(
+        TIMESTAMP(timezone=True), nullable=False, server_default=text("now()")
+    )
     morning = Column(Integer, default=0)
     afternoon = Column(Integer, default=0)
     night = Column(Integer, default=0)
